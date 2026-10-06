@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark,.dark *));
+@theme inline{--color-primary:var(--primary);--color-on-primary:var(--on-primary);--color-primary-container:var(--pc);--color-on-primary-container:var(--on-pc);
+--color-surface:var(--surface);--color-surface-container:var(--sc);--color-on-surface:var(--on-surface);--color-on-surface-variant:var(--osv);
+--color-outline:var(--outline);--color-error:var(--error);--color-inverse:var(--inv);--color-inverse-on:var(--inv-on);--font-sans:system-ui,sans-serif}
+:root{--h:262;--primary:hsl(var(--h) 45% 40%);--on-primary:#fff;--pc:hsl(var(--h) 90% 90%);--on-pc:hsl(var(--h) 60% 12%);
+--surface:hsl(var(--h) 30% 98%);--sc:hsl(var(--h) 25% 93%);--on-surface:hsl(var(--h) 15% 10%);--osv:hsl(var(--h) 10% 35%);
+--outline:hsl(var(--h) 10% 70%);--error:#b3261e;--inv:hsl(var(--h) 10% 20%);--inv-on:hsl(var(--h) 20% 95%)}
+.dark{--primary:hsl(var(--h) 80% 80%);--on-primary:hsl(var(--h) 50% 20%);--pc:hsl(var(--h) 35% 28%);--on-pc:hsl(var(--h) 90% 90%);
+--surface:hsl(var(--h) 12% 9%);--sc:hsl(var(--h) 10% 15%);--on-surface:hsl(var(--h) 10% 90%);--osv:hsl(var(--h) 8% 70%);
+--outline:hsl(var(--h) 6% 40%);--error:#f2b8b5;--inv:hsl(var(--h) 10% 90%);--inv-on:hsl(var(--h) 10% 15%)}
+body{font-family:system-ui,sans-serif;background:var(--surface);color:var(--on-surface);transition:background .3s,color .3s}
+.anim-up{animation:up .3s cubic-bezier(.2,0,0,1) both}.anim-fade{animation:fade .2s both}
+@keyframes up{from{opacity:0;transform:translateY(16px)}}@keyframes fade{from{opacity:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+html{color-scheme:light}.dark{color-scheme:dark}
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--on-surface) 25%,transparent);border-radius:999px;border:3px solid transparent;background-clip:content-box;transition:background .2s}
+::-webkit-scrollbar-thumb:hover{background:var(--primary);background-clip:content-box;border:3px solid transparent}
+::-webkit-scrollbar-corner{background:transparent}
+@supports not selector(::-webkit-scrollbar){*{scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--on-surface) 30%,transparent) transparent}}
