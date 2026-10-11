@@ -22,8 +22,8 @@ export async function toXLSX(cols,rows,sheet){
  const fill=a=>({type:'pattern',pattern:'solid',fgColor:{argb:a}})
  ws.getRow(1).height=26
  ws.eachRow((r,i)=>r.eachCell(c=>{
-  if(i===1){c.font={bold:true,color:{argb:'FFFFFFFF'}};c.fill=fill('FF6750A4');c.alignment={vertical:'middle'}}
-  else{c.alignment={vertical:'top',wrapText:true};c.border={bottom:{style:'thin',color:{argb:'FFE7E0EC'}}};if(i%2===0)c.fill=fill('FFF7F2FA')}}))
+  if(i===1){c.font={bold:true,color:{argb:'FFFFFFFF'}};c.fill=fill('FF4F46E5');c.alignment={vertical:'middle'}}
+  else{c.alignment={vertical:'top',wrapText:true};c.border={bottom:{style:'thin',color:{argb:'FFE7E0EC'}}};if(i%2===0)c.fill=fill('FFFAFAFA')}}))
  ws.autoFilter={from:{row:1,column:1},to:{row:1,column:cols.length}}
  return new Blob([await wb.xlsx.writeBuffer()],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})}
 export async function fromXLSX(buf){
@@ -33,20 +33,20 @@ export async function fromXLSX(buf){
  return out}
 // PNG/PDF: render bằng trình duyệt nên không lỗi font tiếng Việt
 const toImg=async(node,bg)=>(await import('html-to-image')).toPng(node,{pixelRatio:2,backgroundColor:bg,cacheBust:true})
-async function toPDF(img,name){
+async function toPDF(img,name,bg){
  const {jsPDF}=await import('jspdf'),im=new Image();im.src=img;await im.decode()
  const pdf=new jsPDF({unit:'mm',format:'a4'}),W=210,H=297,h=im.height*W/im.width
- for(let y=0,p=0;y<h-0.5;y+=H,p++){if(p)pdf.addPage();pdf.addImage(img,'PNG',0,-y,W,h)}
+ for(let y=0,p=0;y<h-0.5;y+=H,p++){if(p)pdf.addPage();if(bg){pdf.setFillColor(bg);pdf.rect(0,0,W,H,'F')}pdf.addImage(img,'PNG',0,-y,W,h)}
  pdf.save(name)}
-const save=async(img,kind,name)=>kind==='png'?dl(await (await fetch(img)).blob(),name+'.png'):toPDF(img,name+'.pdf')
-export async function exportNode(node,kind,name){await save(await toImg(node,getComputedStyle(document.body).backgroundColor),kind,name)}
+const save=async(img,kind,name,bg)=>kind==='png'?dl(await (await fetch(img)).blob(),name+'.png'):toPDF(img,name+'.pdf',bg)
+export async function exportNode(node,kind,name){const bg=document.documentElement.classList.contains('dark')?'#09090b':'#fafafa';await save(await toImg(node,bg),kind,name,bg)}
 export async function exportReport(kind,title,cols,rows,name){
  const el=document.createElement('div')
  el.style.cssText='position:fixed;left:-99999px;top:0;width:1000px;padding:40px;background:#fff;color:#1d1b20;font-family:system-ui,sans-serif'
- const th='background:#6750A4;color:#fff;text-align:left;padding:10px;font-weight:600'
- el.innerHTML=`<h1 style="margin:0 0 4px;font-size:28px;color:#6750A4">${esc(title)}</h1><p style="margin:0 0 20px;color:#625b71;font-size:13px">VibeLedger · ${new Date().toLocaleString('vi-VN')} · ${rows.length} mục</p>
+ const th='background:#4f46e5;color:#fff;text-align:left;padding:10px;font-weight:600'
+ el.innerHTML=`<h1 style="margin:0 0 4px;font-size:28px;color:#4f46e5">${esc(title)}</h1><p style="margin:0 0 20px;color:#625b71;font-size:13px">VibeLedger · ${new Date().toLocaleString(document.documentElement.lang==='en'?'en-US':'vi-VN')} · ${rows.length} mục</p>
 <table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr>${cols.map(c=>`<th style="${th}">${esc(c[1])}</th>`).join('')}</tr></thead>
-<tbody>${rows.map((r,i)=>`<tr style="background:${i%2?'#f7f2fa':'#fff'}">${cols.map(c=>`<td style="padding:9px 10px;border-bottom:1px solid #e7e0ec;vertical-align:top">${esc(r[c[0]])}</td>`).join('')}</tr>`).join('')}</tbody></table>
-<p style="margin-top:24px;font-size:11px;color:#79747e">Tác giả minhtrong67 · Có sự hỗ trợ của Claude</p>`
+<tbody>${rows.map((r,i)=>`<tr style="background:${i%2?'#fafafa':'#fff'}">${cols.map(c=>`<td style="padding:9px 10px;border-bottom:1px solid #e4e4e7;vertical-align:top">${esc(r[c[0]])}</td>`).join('')}</tr>`).join('')}</tbody></table>
+<p style="margin-top:24px;font-size:11px;color:#79747e">minhtrong67 · Claude</p>`
  document.body.appendChild(el)
  try{await save(await toImg(el,'#fff'),kind,name)}finally{el.remove()}}

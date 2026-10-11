@@ -1,0 +1,57 @@
+import {createContext,useContext} from 'react'
+const RAW=[
+['app.tagline','Biết ngay tài khoản Google nào đang xử lý dự án nào.','See at a glance which Google account is working on which project.'],
+['nav.projects','Dự án','Projects'],['nav.accounts','Tài khoản','Accounts'],['nav.stats','Thống kê','Statistics'],['nav.settings','Cài đặt','Settings'],
+['add','Thêm','Add'],['save','Lưu','Save'],['delete','Xoá','Delete'],['edit','Sửa','Edit'],['cancel','Huỷ','Cancel'],['import','Nhập','Import'],['export','Xuất','Export'],
+['filter','Bộ lọc','Filters'],['clearFilter','Xoá lọc','Clear filters'],['clear','Xoá','Clear'],['close','Đóng','Close'],['reset','Đặt lại','Reset'],['all','Tất cả','All'],['other','Khác','Other'],
+['viewList','Dạng danh sách','List view'],['viewGrid','Dạng lưới','Grid view'],['results','{n} kết quả','{n} results'],['saved','Đã lưu','Saved'],['deleted','Đã xoá','Deleted'],
+['noresult','Không có kết quả phù hợp.','No matching results.'],['menu.open','Mở menu','Open menu'],['search.title','Tìm kiếm (Ctrl+K)','Search (Ctrl+K)'],['theme.now','Giao diện: {mode}','Theme: {mode}'],
+['status.active','Đang làm','In progress'],['status.paused','Tạm dừng','Paused'],['status.done','Hoàn thành','Done'],['status.cancelled','Huỷ','Cancelled'],
+['cat.web','Web app','Web app'],['cat.desktop','Desktop app','Desktop app'],['cat.mobile','Mobile app','Mobile app'],['cat.tool','Tool / CLI','Tool / CLI'],['cat.extension','Extension','Extension'],['cat.game','Game','Game'],['cat.api','API / Backend','API / Backend'],['cat.other','Khác','Other'],
+['col.name','Tên','Name'],['col.desc','Mô tả','Description'],['col.status','Trạng thái','Status'],['col.category','Danh mục','Category'],['col.tags','Công nghệ','Technologies'],['col.tools','Công cụ AI','AI tools'],['col.accounts','Tài khoản','Accounts'],['col.created','Ngày tạo','Created'],['col.email','Email','Email'],['col.note','Ghi chú','Note'],['col.count','Số dự án','Projects'],['col.projects','Dự án tham gia','Joined projects'],
+['projects.count','{n} dự án','{n} projects'],['accounts.count','{n} tài khoản','{n} accounts'],
+['projects.search','Tìm theo tên, hashtag, công cụ, tài khoản...','Search by name, hashtag, tool, account...'],['accounts.search','Tìm theo tên, email, ghi chú...','Search by name, email, note...'],
+['projects.empty','Chưa có dự án nào. Nhấn Thêm để tạo dự án đầu tiên.','No projects yet. Press Add to create your first one.'],['accounts.empty','Chưa có tài khoản nào. Nhấn Thêm để thêm email Google đầu tiên.','No accounts yet. Press Add to add your first Google email.'],
+['dlg.addProject','Thêm dự án','Add project'],['dlg.editProject','Sửa dự án','Edit project'],['dlg.addAccount','Thêm tài khoản','Add account'],['dlg.editAccount','Sửa tài khoản','Edit account'],
+['f.pname','Tên dự án','Project name'],['f.pname.ph','VD: Landing page quán cà phê','e.g. Coffee shop landing page'],['f.desc','Mô tả','Description'],['f.desc.ph','VD: Trang giới thiệu menu và đặt bàn online','e.g. Menu showcase and online booking page'],
+['f.status','Trạng thái','Status'],['f.category','Danh mục','Category'],['f.tags','Công nghệ (hashtag, không cần gõ #)','Technologies (hashtags, no need to type #)'],['f.tags.ph','VD: react (Enter hoặc dấu cách)','e.g. react (Enter or space)'],['none','Không chọn','None'],['f.tags.recent','Gợi ý (hashtag dùng gần đây trước)','Suggestions (recently used first)'],['item.created','Tạo ngày {d}','Created {d}'],['f.tags.more','Thêm...','Add more...'],
+['f.tools','Công cụ AI vibe code','Vibe-coding AI tools'],['f.tools.ph','Chọn công cụ AI','Select an AI tool'],['f.accounts','Tài khoản tham gia','Participating accounts'],['f.accounts.ph','Chọn tài khoản Google','Select Google accounts'],['f.accounts.empty','Hãy thêm tài khoản ở tab Tài khoản trước.','Add accounts in the Accounts tab first.'],
+['f.aname','Tên','Name'],['f.aname.ph','VD: Tài khoản chính','e.g. Main account'],['f.email','Email Google','Google email'],['f.email.ph','ten@gmail.com','name@gmail.com'],['f.note','Ghi chú','Note'],['f.note.ph','VD: Dùng cho Gemini, hết quota ngày 20','e.g. Used for Gemini, quota resets on the 20th'],
+['e.name.req','Vui lòng nhập tên dự án','Please enter a project name'],['e.name.len','Tên dự án phải từ 2 đến 80 ký tự','Project name must be 2-80 characters'],['e.name.dup','Tên dự án đã tồn tại','A project with this name already exists'],['e.desc.len','Mô tả tối đa 500 ký tự','Description is limited to 500 characters'],
+['e.tags.bad','Hashtag chỉ gồm chữ, số, . _ + - (tối đa 30 ký tự)','Hashtags may only contain letters, digits, . _ + - (max 30 chars)'],['e.tags.max','Tối đa 10 hashtag','Maximum 10 hashtags'],
+['e.email.req','Vui lòng nhập email','Please enter an email'],['e.email.bad','Email không hợp lệ','Invalid email address'],['e.email.dup','Email này đã tồn tại','This email already exists'],['e.aname.len','Tên tối đa 60 ký tự','Name is limited to 60 characters'],['e.note.len','Ghi chú tối đa 200 ký tự','Note is limited to 200 characters'],
+['c.title','Xác nhận xoá','Confirm deletion'],['c.delProject','Xoá dự án "{name}"? Hành động này không thể hoàn tác.','Delete project "{name}"? This cannot be undone.'],['c.delAccount','Xoá tài khoản "{name}"? Tài khoản cũng sẽ được gỡ khỏi các dự án đang tham gia. Hành động này không thể hoàn tác.','Delete account "{name}"? It will also be removed from the projects it joined. This cannot be undone.'],
+['flt.status','Trạng thái','Status'],['flt.category','Danh mục','Category'],['flt.allcat','Tất cả danh mục','All categories'],['flt.sort','Sắp xếp','Sort by'],['flt.part','Tham gia dự án','Participation'],['flt.busy','Đang tham gia','Participating'],['flt.free','Chưa có dự án','No projects'],
+['sort.new','Mới nhất','Newest'],['sort.old','Cũ nhất','Oldest'],['sort.az','Tên A-Z','Name A-Z'],['sort.most','Nhiều dự án nhất','Most projects'],
+['item.noacc','Chưa gán tài khoản','No account assigned'],['item.noproj','Chưa tham gia dự án nào','Not in any project'],['item.nprojects','{n} dự án','{n} projects'],
+['x.fmt.csv','CSV (.csv)','CSV (.csv)'],['x.fmt.json','JSON (.json)','JSON (.json)'],['x.fmt.xlsx','Excel (.xlsx)','Excel (.xlsx)'],['x.fmt.pdf','PDF (.pdf)','PDF (.pdf)'],['x.fmt.png','Ảnh PNG (.png)','PNG image (.png)'],
+['x.exported','Đã xuất file','File exported'],['x.empty','Không có dữ liệu để xuất','No data to export'],['x.imported','Nhập xong: thêm {added}, cập nhật {updated}, bỏ qua {skipped}','Import done: {added} added, {updated} updated, {skipped} skipped'],
+['x.badfile','Chỉ hỗ trợ file CSV, JSON, XLSX','Only CSV, JSON and XLSX files are supported'],['x.nodata','File không có dữ liệu hợp lệ','The file has no valid data'],['x.max','Tối đa 400 dòng mỗi lần nhập','Up to 400 rows per import'],['x.err','Có lỗi xảy ra','Something went wrong'],
+['s.total','Tổng dự án','Total projects'],['s.accounts','Tài khoản','Accounts'],['s.unassigned','Chưa gán tài khoản','Unassigned'],['s.avg','TB tài khoản / dự án','Avg. accounts / project'],
+['s.byStatus','Dự án theo trạng thái','Projects by status'],['s.byCat','Dự án theo danh mục','Projects by category'],['s.byTool','Công cụ AI được dùng','AI tools used'],['s.byAcc','Dự án theo tài khoản','Projects by account'],['s.tags','Công nghệ phổ biến','Popular technologies'],
+['s.nodata','Chưa có dữ liệu trong khoảng này.','No data in this period.'],['s.report','Báo cáo thống kê','Statistics report'],['s.sub','Số liệu theo thời điểm tạo dự án','Based on project creation date'],
+['p.all','Tất cả','All time'],['p.day','Ngày','Day'],['p.week','Tuần','Week'],['p.month','Tháng','Month'],['p.year','Năm','Year'],['p.prev','Kỳ trước','Previous'],['p.next','Kỳ sau','Next'],
+['st.install','Cài VibeLedger lên thiết bị','Install VibeLedger on your device'],['st.install.desc','Dùng như app thật: mở nhanh từ màn hình chính, toàn màn hình và mượt hơn.','Use it like a native app: launch from your home screen, full screen and faster.'],['st.install.btn','Cài đặt','Install'],
+['st.install.ios','Trên iPhone/iPad: nhấn nút Chia sẻ rồi chọn "Thêm vào Màn hình chính".','On iPhone/iPad: tap Share, then choose "Add to Home Screen".'],['st.install.manual','Mở menu trình duyệt và chọn "Cài đặt ứng dụng" hoặc "Thêm vào màn hình chính".','Open your browser menu and choose "Install app" or "Add to Home screen".'],
+['st.appearance','Giao diện','Appearance'],['st.theme','Chế độ hiển thị','Display mode'],['theme.light','Sáng','Light'],['theme.dark','Tối','Dark'],['theme.system','Hệ thống','System'],
+['st.accent','Màu chủ đề','Accent color'],['st.fontsize','Cỡ chữ','Font size'],['st.preview','Xem trước: Biết ngay tài khoản nào đang xử lý dự án nào.','Preview: See which account works on which project.'],['st.lang','Ngôn ngữ','Language'],
+['st.home','Trang mặc định khi mở','Default page on launch'],['st.data','Dữ liệu','Data'],['st.data.desc','Nhập / xuất dự án và tài khoản (CSV, JSON, Excel, PDF, PNG) hoặc sao lưu toàn bộ bằng JSON. Dữ liệu trùng sẽ được ghi đè, không bị nhân đôi.','Import / export projects and accounts (CSV, JSON, Excel, PDF, PNG) or back up everything as JSON. Matching data is overwritten, never duplicated.'],
+['st.reset','Khôi phục mặc định','Restore defaults'],['st.reset.desc','Đặt lại giao diện, ngôn ngữ, cỡ chữ, màu chủ đề và trang mở đầu. Dữ liệu của bạn không bị ảnh hưởng.','Reset theme, language, font size, accent color and start page. Your data is not affected.'],['st.reset.done','Đã khôi phục cài đặt mặc định','Defaults restored'],
+['st.account','Tài khoản đăng nhập','Signed-in account'],['st.logout','Đăng xuất','Sign out'],['st.about','Giới thiệu','About'],['st.version','Phiên bản','Version'],
+['accent.indigo','Chàm','Indigo'],['accent.violet','Tím','Violet'],['accent.sky','Xanh trời','Sky'],['accent.teal','Xanh mòng két','Teal'],['accent.emerald','Lục bảo','Emerald'],['accent.amber','Hổ phách','Amber'],['accent.orange','Cam','Orange'],['accent.rose','Hồng','Rose'],
+['pal.ph','Tìm trang, dự án, tài khoản...','Search pages, projects, accounts...'],['pal.none','Không tìm thấy kết quả.','No results found.'],['pal.page','Trang','Page'],['pal.action','Hành động','Action'],['pal.theme','Đổi giao diện','Switch theme'],['pal.addProject','Thêm dự án','Add project'],['pal.addAccount','Thêm tài khoản','Add account'],
+['login.btn','Đăng nhập với Google','Sign in with Google'],['login.noconfig','Chưa cấu hình Firebase. Điền các giá trị trong file .env rồi chạy lại npm run dev.','Firebase is not configured. Fill in the .env values and restart npm run dev.'],
+['credit.by','Tác giả','Author'],['credit.with','Có sự hỗ trợ của','Built with help from'],
+]
+export const DICT={vi:{},en:{}}
+RAW.forEach(([k,v,e])=>{DICT.vi[k]=v;DICT.en[k]=e})
+export const makeT=lang=>(k,v={})=>(DICT[lang]?.[k]??k).replace(/\{(\w+)\}/g,(_,n)=>v[n]??'')
+export const I18n=createContext({t:makeT('vi'),lang:'vi'})
+export const useT=()=>useContext(I18n)
+export const STATUS_KEYS=['active','paused','done','cancelled']
+export const CAT_KEYS=['web','desktop','mobile','tool','extension','game','api','other']
+const LEGACY={'Web app':'web','Desktop app':'desktop','Mobile app':'mobile','Tool / CLI':'tool','Extension':'extension','Game':'game','API / Backend':'api','Khác':'other'}
+export const catKey=c=>CAT_KEYS.includes(c)?c:LEGACY[c]||'other'
+export const TOOLS=['ChatGPT','Claude','Claude Code','Gemini','Gemini CLI','AI Studio','Antigravity','Cursor','Windsurf','GitHub Copilot','Codex','Kiro','Trae','Lovable','Bolt','v0','Replit','Other']
+export const toolKey=x=>x==='Khác'?'Other':x
+export const locale=lang=>lang==='en'?'en-US':'vi-VN'

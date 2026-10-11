@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/pwa-192.png" width="96" alt="VibeLedger logo"/>
+  <img src="public/pwa-192.png" width="88" alt="VibeLedger logo"/>
 
   # VibeLedger
 
@@ -9,34 +9,30 @@
   ![Vite](https://img.shields.io/badge/Vite-6-646cff?logo=vite&logoColor=white)
   ![Tailwind](https://img.shields.io/badge/Tailwind-4-38bdf8?logo=tailwindcss&logoColor=white)
   ![Firebase](https://img.shields.io/badge/Firebase-11-ffca28?logo=firebase&logoColor=black)
+  ![PWA](https://img.shields.io/badge/PWA-ready-4f46e5)
   ![License](https://img.shields.io/badge/license-MIT-green)
 </div>
 
 ## Giới thiệu
-Khi vibe code nhiều dự án cùng lúc, mỗi dự án lại gắn với một tài khoản Google khác nhau và rất dễ nhầm lẫn. **VibeLedger** giúp bạn quản lý danh sách dự án, danh sách tài khoản và quan hệ giữa chúng ở một nơi duy nhất, dùng được trên máy tính lẫn điện thoại (PWA).
+Khi vibe code nhiều dự án cùng lúc, mỗi dự án lại gắn với một tài khoản Google khác nhau và rất dễ nhầm lẫn. **VibeLedger** gom danh sách dự án, tài khoản và mối quan hệ giữa chúng vào một nơi, dùng mượt trên cả máy tính lẫn điện thoại (PWA), hỗ trợ tiếng Việt và tiếng Anh.
 
 ## Screenshot
-> Thêm ảnh chụp màn hình vào `docs/screenshots/` rồi cập nhật các đường dẫn bên dưới.
-
 | Dự án | Tài khoản | Thống kê |
 | :---: | :---: | :---: |
-| ![Dự án](docs/screenshots/projects.png) | ![Tài khoản](docs/screenshots/accounts.png) | ![Thống kê](docs/screenshots/stats.png) |
+| ![Dự án](screenshots/image01.png) | ![Tài khoản](screenshots/image02.png) | ![Thống kê](screenshots/image03.png) |
 
 ## Tính năng
-- **Quản lý dự án**: tên, mô tả, trạng thái (Đang làm / Tạm dừng / Hoàn thành / Huỷ), danh mục (Web app, Desktop app, Mobile app, Tool...), hashtag công nghệ (`#react #css`), công cụ AI vibe code chọn từ danh sách sẵn, gán nhiều tài khoản
+- **Quản lý dự án**: tên, mô tả, trạng thái (Đang làm / Tạm dừng / Hoàn thành / Huỷ), danh mục, hashtag công nghệ, công cụ AI vibe code, gán nhiều tài khoản
 - **Quản lý tài khoản**: tên, email Google, ghi chú; xem tài khoản đang tham gia dự án nào
-- **Tìm kiếm, lọc và sắp xếp** ở cả hai trang quản lý
-- **Nhập / xuất dữ liệu**: nhập CSV, JSON, Excel; xuất CSV (UTF-8 BOM), JSON, Excel có định dạng, PDF, PNG; xuất báo cáo thống kê PNG / PDF
-- **Command palette** `Ctrl + K` để chuyển trang, tìm dự án / tài khoản, đổi giao diện
-- **Trang thống kê chi tiết**: tổng quan, dự án theo trạng thái / danh mục, công cụ AI và công nghệ phổ biến, tài khoản tham gia và đang làm nhiều dự án nhất
-- **Responsive**: thanh điều hướng dưới trên điện thoại, navigation rail và lưới nhiều cột trên laptop / PC
-- **Xác nhận trước khi xoá** bằng hộp thoại
+- **Tìm kiếm, lọc, sắp xếp, xoá lọc**; bộ lọc từng trang được nhớ bằng `sessionStorage`
+- **Dạng danh sách / lưới** cho mọi danh sách dữ liệu
+- **Nhập / xuất** (trong Cài đặt, cho cả Dự án và Tài khoản): nhập CSV, JSON, XLSX (trùng dữ liệu thì ghi đè, không nhân đôi); xuất CSV, JSON, XLSX, PDF, PNG với định dạng chuẩn, không lỗi font
+- **Thống kê**: thẻ số liệu, biểu đồ cột dọc và biểu đồ tròn có đầy đủ nhãn, lọc theo ngày / tuần / tháng / năm, xuất báo cáo PDF / PNG theo bộ lọc
+- **Cài đặt**: giao diện sáng / tối / hệ thống, ngôn ngữ, cỡ chữ, màu chủ đề, trang mở mặc định, sao lưu / khôi phục dữ liệu, khôi phục mặc định
+- **PWA** cài được trên điện thoại, có thẻ cài đặt nổi bật trong Cài đặt
 - Đăng nhập Google, đồng bộ realtime với Firestore, dữ liệu tách riêng theo từng người dùng
-- Giao diện Material Design 3: sáng / tối / hệ thống, đổi màu chủ đề, chỉnh cỡ chữ
-- PWA cài được trên điện thoại, toast thông báo, skeleton loading, animation mượt
-
-## Download
-Tải bản build sẵn tại trang [Releases](../../releases) hoặc truy cập bản web đã triển khai, sau đó chọn **Cài đặt ứng dụng / Thêm vào màn hình chính** trên trình duyệt để dùng như app.
+- **Hiệu năng**: tách bundle theo trang, Firestore chỉ nạp sau khi đăng nhập, thư viện xuất file nạp khi cần, cache IndexedDB để mở lại là có dữ liệu ngay, danh sách dùng `memo` và tìm kiếm có `useDeferredValue`
+- Command palette `Ctrl + K`, bottom bar và sidebar trên mobile, form kiểm tra dữ liệu chặt chẽ với toast lỗi, skeleton loading, animation mượt
 
 ## Cài đặt
 Yêu cầu: Node.js 18+ và một project Firebase.
@@ -45,6 +41,7 @@ Yêu cầu: Node.js 18+ và một project Firebase.
 git clone <repo-url> vibeledger
 cd vibeledger
 npm install
+cp .env.example .env   # rồi điền Firebase config
 ```
 
 1. Tạo project tại [Firebase Console](https://console.firebase.google.com), thêm Web app và chép config vào `.env`.
@@ -62,11 +59,11 @@ service cloud.firestore {
 ```
 
 ## Tech stack
-React 18 · Vite 6 · Tailwind CSS 4 · Firebase (Auth, Firestore) · ExcelJS · jsPDF · html-to-image · vite-plugin-pwa · Material Design 3
+React 18 · Vite 6 · Tailwind CSS 4 · Firebase (Auth, Firestore) · Lucide Icons · ExcelJS · jsPDF · html-to-image · vite-plugin-pwa
 
 ## Development
 ```bash
-npm run dev       # chạy dev server tại http://localhost:5173
+npm run dev       # http://localhost:5173
 npm run preview   # xem thử bản build
 ```
 
@@ -74,22 +71,27 @@ npm run preview   # xem thử bản build
 ```bash
 npm run build     # output trong dist/
 ```
-Triển khai thư mục `dist/` lên Firebase Hosting, Vercel hoặc Netlify. Cần HTTPS để PWA cài đặt được, và nhớ thêm domain vào *Authorized domains* của Firebase Auth.
+Triển khai `dist/` lên Firebase Hosting, Vercel hoặc Netlify. Cần HTTPS để PWA cài đặt được, và thêm domain vào *Authorized domains* của Firebase Auth.
 
 ## Cấu trúc project
 ```
 vibeledger/
-├── public/            # icon PWA, favicon
-├── docs/screenshots/  # ảnh chụp màn hình cho README
+├── public/              # favicon, app icon PWA
+├── screenshots/         # ảnh README: image01, image02, image03
 ├── src/
-│   ├── App.jsx        # đăng nhập, trang Dự án / Tài khoản / Thống kê / Cài đặt
-│   ├── ui.jsx         # Button, Dialog, Toast, Skeleton, theme hook
-│   ├── io.js          # nhập / xuất CSV, JSON, XLSX, PDF, PNG
-│   ├── firebase.js    # khởi tạo Firebase từ .env
-│   ├── index.css      # token màu M3, animation
-│   └── main.jsx
-├── .env               # Firebase config (không commit)
-├── vite.config.js     # Vite + PWA manifest
+│   ├── pages/           # Projects, Accounts, Stats, Settings
+│   ├── components/      # Toolbar, forms, charts
+│   ├── App.jsx          # đăng nhập, header, sidebar, bottom bar, Ctrl+K
+│   ├── data.jsx         # Firestore realtime + CRUD + import upsert
+│   ├── transfer.js      # chuẩn hoá dữ liệu nhập / xuất
+│   ├── io.js            # CSV, XLSX, PDF, PNG
+│   ├── i18n.js          # từ điển vi / en
+│   ├── hooks.js         # cài đặt, sessionStorage, PWA install
+│   ├── ui.jsx           # Button, Dialog, Toast, Skeleton...
+│   ├── firebase.js
+│   └── index.css        # Tailwind + design tokens
+├── .env.example
+├── vite.config.js
 └── LICENSE
 ```
 
@@ -97,4 +99,4 @@ vibeledger/
 Phát hành theo giấy phép [MIT](LICENSE).
 
 ---
-Tác giả **minhtrong67** · Có sự hỗ trợ của Claude (Anthropic)
+<div align="center">Tác giả <b>minhtrong67</b> · Có sự hỗ trợ của <b>Claude</b> (Anthropic)</div>
