@@ -35,13 +35,13 @@ export function useTransfer(type,items){
  const run=async fn=>{setBusy(true);try{toast(await fn())}catch(e){toast(t(e.message||'x.err'),'error')}setBusy(false)}
  const exportAs=fmt=>run(async()=>{
   if(!items?.length)throw new Error('x.empty')
-  const cols=COLS[type].map(([k,w])=>[k,t('col.'+k),w]),loc=locale(lang),name=`vibeledger-${type}-${new Date().toISOString().slice(0,10)}`
+  const cols=COLS[type].map(([k,w])=>[k,t('col.'+k),w]),loc=locale(lang),name=`project-tracker-${type}-${new Date().toISOString().slice(0,10)}`
   const rows=items.map(it=>type==='projects'
    ?{name:it.name,desc:it.desc||'',status:t('status.'+it.status),category:t('cat.'+catKey(it.category)),tags:(it.tags||[]).map(x=>'#'+x).join(' '),tools:(it.tools||[]).map(x=>toolKey(x)==='Other'?t('other'):x).join(', '),accounts:(it.userIds||[]).map(i=>accMap[i]?.email).filter(Boolean).join(', '),created:it.createdAt?.toDate?.().toLocaleDateString(loc)||''}
    :{name:it.name||'',email:it.email,note:it.note||'',count:projects.filter(p=>p.userIds?.includes(it.id)).length,projects:projects.filter(p=>p.userIds?.includes(it.id)).map(p=>p.name).join(', ')})
   const title=t('nav.'+type)
   if(fmt==='csv')dl(new Blob([toCSV(cols,rows)],{type:'text/csv;charset=utf-8'}),name+'.csv')
-  else if(fmt==='json')dl(new Blob([JSON.stringify({app:'VibeLedger',type,exportedAt:new Date().toISOString(),data:items.map(it=>rec[type](it,accMap))},null,2)],{type:'application/json'}),name+'.json')
+  else if(fmt==='json')dl(new Blob([JSON.stringify({app:'Project Tracker',type,exportedAt:new Date().toISOString(),data:items.map(it=>rec[type](it,accMap))},null,2)],{type:'application/json'}),name+'.json')
   else if(fmt==='xlsx')dl(await toXLSX(cols,rows,title),name+'.xlsx')
   else await exportReport(fmt,title,cols,rows,name)
   return t('x.exported')})

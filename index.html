@@ -3,38 +3,48 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>VibeLedger - Quản lý dự án và tài khoản vibe code</title>
-<meta name="description" content="VibeLedger giúp theo dõi tài khoản Google nào đang xử lý dự án vibe code nào: quản lý dự án, tài khoản, công cụ AI, công nghệ và thống kê. / Track which Google account works on which vibe-coding project."/>
+<title>Project Tracker - Theo dõi dự án và tài khoản vibe code</title>
+<meta name="description" content="Project Tracker là web app tối giản giúp theo dõi tài khoản Google nào đang xử lý dự án vibe code nào: quản lý dự án, tài khoản, công cụ AI, công nghệ và thống kê. / Track which Google account works on which vibe-coding project."/>
 <meta name="keywords" content="vibe code, quản lý dự án, project tracker, tài khoản Google, AI tools, PWA, React, Firebase"/>
 <meta name="author" content="minhtrong67"/>
 <meta name="generator" content="Claude"/>
 <meta name="robots" content="noindex, nofollow"/>
-<meta name="application-name" content="VibeLedger"/>
+<meta name="application-name" content="Project Tracker"/>
 <meta name="color-scheme" content="light dark"/>
 <meta name="theme-color" content="#fafafa" id="tc"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-title" content="VibeLedger"/>
+<meta name="apple-mobile-web-app-title" content="Project Tracker"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
 <meta name="format-detection" content="telephone=no"/>
 <meta property="og:type" content="website"/>
-<meta property="og:site_name" content="VibeLedger"/>
-<meta property="og:title" content="VibeLedger - Sổ cái cho dân vibe code"/>
+<meta property="og:site_name" content="Project Tracker"/>
+<meta property="og:title" content="Project Tracker - Theo dõi dự án vibe code"/>
 <meta property="og:description" content="Biết ngay tài khoản Google nào đang xử lý dự án nào."/>
 <meta property="og:image" content="/pwa-512.png"/>
 <meta property="og:locale" content="vi_VN"/>
 <meta property="og:locale:alternate" content="en_US"/>
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="VibeLedger"/>
+<meta name="twitter:title" content="Project Tracker"/>
 <meta name="twitter:description" content="Biết ngay tài khoản Google nào đang xử lý dự án nào."/>
 <meta name="twitter:image" content="/pwa-512.png"/>
 <link rel="dns-prefetch" href="https://firestore.googleapis.com"/>
 <link rel="dns-prefetch" href="https://apis.google.com"/>
-<style>.splash{display:grid;place-items:center;min-height:100vh;background:#fafafa}html.dark .splash{background:#09090b}.splash img{width:56px;height:56px;border-radius:14px;animation:p 1.2s ease-in-out infinite alternate}@keyframes p{to{opacity:.5}}</style>
+<style>
+/* Nền khớp giao diện sáng/tối ngay từ khung hình đầu, trước cả khi CSS/JS tải xong (tránh nháy trắng) */
+html{background:#fff;color-scheme:light}
+html.dark{background:#18181b;color-scheme:dark}
+body{margin:0;background:inherit}
+.splash{display:grid;place-items:center;min-height:100vh;min-height:100dvh;background:inherit}
+.splash-logo{width:56px;height:56px;border-radius:14px;animation:splash-p 1.2s ease-in-out infinite alternate}
+@keyframes splash-p{to{opacity:.5}}
+@media(prefers-reduced-motion:reduce){.splash-logo{animation:none}}
+</style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
-<script>try{var s=JSON.parse(localStorage.getItem('settings')||'{}'),d=s.mode==='dark'||((s.mode||'system')==='system'&&matchMedia('(prefers-color-scheme: dark)').matches),r=document.documentElement;r.classList.toggle('dark',d);r.dataset.accent=s.accent||'indigo';if(s.lang)r.lang=s.lang}catch(e){}</script>
+<script>try{var s=JSON.parse(localStorage.getItem('settings')||'{}'),d=s.mode==='dark'||((s.mode||'system')==='system'&&matchMedia('(prefers-color-scheme: dark)').matches),r=document.documentElement;r.classList.toggle('dark',d);r.dataset.accent=s.accent||'indigo';if(s.lang)r.lang=s.lang;if(s.fs)r.style.fontSize=s.fs+'px';document.getElementById('tc').setAttribute('content',d?'#27272a':'#fafafa')}catch(e){}</script>
 </head>
-<body><div id="root"><div class="splash"><img src="/favicon.svg" alt="VibeLedger"/></div></div><script type="module" src="/src/main.jsx"></script></body>
+<body><div id="root"><div class="splash"><img class="splash-logo" src="/favicon.svg" width="56" height="56" alt="Project Tracker"/></div></div><script type="module" src="/src/main.jsx"></script></body>
 </html>

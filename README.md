@@ -1,20 +1,20 @@
 <div align="center">
-  <img src="public/pwa-192.png" width="88" alt="VibeLedger logo"/>
+  <img src="public/pwa-192.png" width="88" alt="Project Tracker logo"/>
 
-  # VibeLedger
+  # Project Tracker
 
-  **Sổ cái cho dân vibe code: biết ngay tài khoản Google nào đang xử lý dự án nào.**
+  **Theo dõi dự án vibe code: biết ngay tài khoản Google nào đang xử lý dự án nào.**
 
   ![React](https://img.shields.io/badge/React-18-61dafb?logo=react&logoColor=white)
   ![Vite](https://img.shields.io/badge/Vite-6-646cff?logo=vite&logoColor=white)
   ![Tailwind](https://img.shields.io/badge/Tailwind-4-38bdf8?logo=tailwindcss&logoColor=white)
   ![Firebase](https://img.shields.io/badge/Firebase-11-ffca28?logo=firebase&logoColor=black)
-  ![PWA](https://img.shields.io/badge/PWA-ready-4f46e5)
+  ![PWA](https://img.shields.io/badge/PWA-ready-6366f1)
   ![License](https://img.shields.io/badge/license-MIT-green)
 </div>
 
 ## Giới thiệu
-Khi vibe code nhiều dự án cùng lúc, mỗi dự án lại gắn với một tài khoản Google khác nhau và rất dễ nhầm lẫn. **VibeLedger** gom danh sách dự án, tài khoản và mối quan hệ giữa chúng vào một nơi, dùng mượt trên cả máy tính lẫn điện thoại (PWA), hỗ trợ tiếng Việt và tiếng Anh.
+Khi vibe code nhiều dự án cùng lúc, mỗi dự án lại gắn với một tài khoản Google khác nhau và rất dễ nhầm lẫn. **Project Tracker** gom danh sách dự án, tài khoản và mối quan hệ giữa chúng vào một nơi, dùng mượt trên cả máy tính lẫn điện thoại (PWA), hỗ trợ tiếng Việt và tiếng Anh.
 
 ## Screenshot
 | Dự án | Tài khoản | Thống kê |
@@ -38,8 +38,8 @@ Khi vibe code nhiều dự án cùng lúc, mỗi dự án lại gắn với mộ
 Yêu cầu: Node.js 18+ và một project Firebase.
 
 ```bash
-git clone <repo-url> vibeledger
-cd vibeledger
+git clone <repo-url> project-tracker
+cd project-tracker
 npm install
 cp .env.example .env   # rồi điền Firebase config
 ```
@@ -58,6 +58,9 @@ service cloud.firestore {
 }
 ```
 
+## Thiết kế
+Phong cách **clean · modern · minimalist** theo hướng component của [shadcn/ui](https://ui.shadcn.com): bo góc vừa phải, viền mảnh, bóng đổ nhẹ, nhiều khoảng trắng. Toàn bộ màu dùng design token OKLCH của theme **Neutral Indigo** (`src/index.css`), có đủ bản sáng / tối; người dùng vẫn đổi được màu chủ đề trong Cài đặt.
+
 ## Tech stack
 React 18 · Vite 6 · Tailwind CSS 4 · Firebase (Auth, Firestore) · Lucide Icons · ExcelJS · jsPDF · html-to-image · vite-plugin-pwa
 
@@ -75,13 +78,14 @@ Triển khai `dist/` lên Firebase Hosting, Vercel hoặc Netlify. Cần HTTPS �
 
 ## Cấu trúc project
 ```
-vibeledger/
+project-tracker/
 ├── public/              # favicon, app icon PWA
 ├── screenshots/         # ảnh README: image01, image02, image03
 ├── src/
 │   ├── pages/           # Projects, Accounts, Stats, Settings
 │   ├── components/      # Toolbar, forms, charts
-│   ├── App.jsx          # đăng nhập, header, sidebar, bottom bar, Ctrl+K
+│   ├── App.jsx          # đăng nhập, cài đặt, providers
+│   ├── Shell.jsx        # header, sidebar, bottom bar, Ctrl+K
 │   ├── data.jsx         # Firestore realtime + CRUD + import upsert
 │   ├── transfer.js      # chuẩn hoá dữ liệu nhập / xuất
 │   ├── io.js            # CSV, XLSX, PDF, PNG
@@ -89,7 +93,7 @@ vibeledger/
 │   ├── hooks.js         # cài đặt, sessionStorage, PWA install
 │   ├── ui.jsx           # Button, Dialog, Toast, Skeleton...
 │   ├── firebase.js
-│   └── index.css        # Tailwind + design tokens
+│   └── index.css        # Tailwind + design token shadcn (Neutral Indigo)
 ├── .env.example
 ├── vite.config.js
 └── LICENSE

@@ -11,7 +11,7 @@ export default defineConfig({
   if(/node_modules\/(jspdf|html-to-image|fflate)\//.test(id))return 'report'
   if(/node_modules\/react(-dom)?\//.test(id))return 'react'}}}},
  plugins:[react(),tailwindcss(),VitePWA({registerType:'autoUpdate',workbox:{globIgnores:['**/excel-*.js','**/report-*.js','**/html2canvas*.js','**/index.es-*.js','**/purify*.js'],runtimeCaching:[{urlPattern:({url})=>/\/assets\/(excel|report|html2canvas|index\.es|purify)/.test(url.pathname),handler:'StaleWhileRevalidate',options:{cacheName:'export-libs'}}]},
- includeAssets:['favicon.svg','favicon-32.png','apple-touch-icon.png'],
- manifest:{name:'VibeLedger',short_name:'VibeLedger',description:'Theo dõi tài khoản Google nào đang xử lý dự án vibe code nào',
-  theme_color:'#4f46e5',background_color:'#fafafa',display:'standalone',orientation:'portrait',start_url:'/',
+ includeAssets:['favicon.svg','favicon-32.png','favicon-48.png','apple-touch-icon.png'],
+ manifest:{name:'Project Tracker',short_name:'Project Tracker',description:'Theo dõi tài khoản Google nào đang xử lý dự án vibe code nào',
+  theme_color:'#6366f1',background_color:'#ffffff',display:'standalone',orientation:'portrait',start_url:'/',
   icons:[{src:'pwa-192.png',sizes:'192x192',type:'image/png'},{src:'pwa-512.png',sizes:'512x512',type:'image/png'},{src:'maskable-512.png',sizes:'512x512',type:'image/png',purpose:'maskable'}]}})]})
